@@ -79,20 +79,24 @@ class DWXStore(with_metaclass(MetaSingleton, object)):
         self._market_open = True
         self._delay = 0.5        
         self._zmq = DWX_ZeroMQ_Connector(_host=self.p.host, _verbose=self._verbose)
-        
+
+
+        print("waiting while the connection is initialized...")
+        time.sleep(3)
+
+        print("getting all open trades...")
         self._zmq._set_response_() #Clear de response
         self._zmq._DWX_MTX_GET_ALL_OPEN_TRADES_()
         
-        print("getting all open trades...")
         while not self._zmq._get_response_():
             time.sleep(1)
             
         respondZmq = self._zmq._get_response_()          
         
         
+        print("close all open trades...")
         self._zmq._DWX_MTX_CLOSE_TRADES_BY_MAGIC_(123456)
 
-        print("close all open trades...")
         while not self._zmq._get_response_():
             time.sleep(1)
             
