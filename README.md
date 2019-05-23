@@ -7,7 +7,7 @@ Also, you can find some example strategies implemented.
 # Deploy (python 3.7)
 
 ```sh
-$ git clone --recursive https://github.com/Python-para-Trading/wrapper-backtrader.git
+$ git clone --recursive https://github.com/rfjaimes/wrapper-backtrader
 $ cd wrapper-backtrader
 $ virtualenv -p python3.7 env
 $ source env/bin/activate
