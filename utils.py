@@ -16,7 +16,7 @@ def run_strategy(cerebro):
     if CONFIG['mode'] == 'backtest':
         # Print out the final result
         _show_backtest_end(cerebro.broker)
-        _show_analyzers_end(strats[0])
+        #_show_analyzers_end(strats[0])
 
 
 def add_analyzers(cerebro):

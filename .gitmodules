@@ -1,0 +1,3 @@
+[submodule "vendor/dwx-zeromq-connector"]
+	path = vendor/dwx-zeromq-connector
+	url = https://github.com/darwinex/dwx-zeromq-connector.git

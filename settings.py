@@ -23,7 +23,7 @@ CONFIG = {
         'value': 0.02,
     },
     'strategies': [ # One or more strategies to run
-        Aberration_RSI
+        Test_DWX
         # Aberration,
         # AberrationSideway,
         # RSI,
