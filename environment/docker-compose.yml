@@ -1,0 +1,54 @@
+version: '3.5'
+services:
+  influxdb:
+    container_name: influxdb-server
+    image: influxdb
+    environment:
+      - INFLUXDB_DB=dwx
+      - INFLUXDB_USER=telegraf
+      - INFLUXDB_USER_PASSWORD=TelegrafPassword
+    volumes:
+      - influxdb:/var/lib/influxdb
+    ports:
+      - "8086:8086"
+    networks:
+      - backend
+    labels:
+      - "traefik.enable=false"
+      - "container_group=TIG"
+ 
+  metatrader:
+    image: paduel/metadrader_vnc
+    cap_add:
+      -  SYS_PTRACE
+    ports:
+      - "5900:5900" 
+      - '32768:32768'
+      - '32769:32769'
+      - '32770:32770'
+    volumes:
+      - ./mt4:/home/winer/.wine/drive_c/mt4
+#      - /<path to the folder>/Darwinex_MT4:/home/winer/.wine/drive_c/mt4
+    networks:
+      - backend
+
+
+  backtrader:
+    build: 
+      context: ./
+      dockerfile: Dockerfile-py
+    working_dir: /code
+    command: python3 test_dwx.py
+    volumes:
+      - './../:/code'
+    networks:
+      - backend
+
+ 
+networks:
+  backend:
+
+ 
+volumes:
+  influxdb:
+
